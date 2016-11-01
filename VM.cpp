@@ -14,11 +14,8 @@ Fluxo genérico de funcionamento
 - A máquina calcula o troco (setTroco)
 - Devolve o troco (devolve_troco)
 
-*Verificar se o saldo é suficiente para a compra
 *Verificar se o encapsulamento dos atributos e métodos está correto
-*Há necessidade de criar métodos get? Talvez utilizar os retornos destes no programa principal,
-	para mostrar o que acontece após uma instrução. 
-	 
+
 */
 
 #include <iostream>
@@ -34,21 +31,20 @@ public:
 	
 	VM(); //construtor
 	
-	void liga_desliga(); //liga ou desliga a máquina, invertendo o estado atual
-	void set_item(int n_item); //escolhe um dos itens disponíveis de acordo com o número digitado pelo usuário
-
-
-private:
-	
+	bool liga_desliga(); //liga ou desliga a máquina, invertendo o estado atual
+	bool set_item(int n_item); //escolhe um dos itens disponíveis de acordo com o número digitado pelo usuário
+	void setTroco(int n_item);
 	float devolve_troco(); //libera o troco
-	string libera_produto(int n_item); //libera o produto escolhido
+	bool libera_produto(int n_item); //libera o produto escolhido
  	float set_preco(float preco); //
 	int set_quantidade(int quantidade);
 	bool destranca(int s);
 	
 	void setSaldo(float s); //
-	void setTroco(float t);
 	float getSaldo();
+	
+
+private:
 	
 	int quantidadeItem[nTipos];
 	string modelo;
@@ -61,9 +57,9 @@ private:
     
 };
 
-VM::VM(){
+VM::VM(){ //construtor
 	for(int i = 0; i < nTipos; i++){
-		quantidadeItem[i] = 0;
+		quantidadeItem[i] = 10;
 	}
 	
 	modelo = " ";
@@ -71,7 +67,7 @@ VM::VM(){
 	ligado = false;
 	
 	for(int i = 0; i < nTipos; i++){
-		precoItem[i] = 0;
+		precoItem[i] = 2.00;
 	}
 	
 	saldo = 0;
@@ -80,30 +76,34 @@ VM::VM(){
 	
 }
 
-void VM::liga_desliga(){
+bool VM::liga_desliga(){ 
 	ligado = !ligado;
 	
 	if (ligado){
-		cout << "A máquina ligou" << endl;
+		return true; 
 	} else{
-		cout << "A máquina desligou" << endl;
+		return false;
 	}
 }
 
-void VM::set_saldo(float s){
-	saldo = s;
-	
-	cout << "Saldo atual: " << saldo << endl; 
+void VM::setSaldo(float s){
+	saldo = s;	
+}
+
+float VM::getSaldo(){
+	return saldo;
 	
 }
 
-void VM::set_item(int n_item){ //cin >> "Digite o número do item" >>  
+
+bool VM::set_item(int n_item){ //cin >> "Digite o número do item" >>  
 	
 	if(quantidadeItem[n_item] > 0){
-	
 		quantidadeItem[n_item]--;
-		setTroco(n_item);
+		return true;
+		
 	} else {
+		return false;
 		cout << "Item indisponível, escolha outro" << endl;
 		
 	}
@@ -114,19 +114,19 @@ void VM::set_item(int n_item){ //cin >> "Digite o número do item" >>
 void VM::setTroco(int item){
 	troco = saldo - precoItem[item];
 	
-	cout << "Troco: " << 
 }
 
 
-string VM:: libera_produto(int n_item){
-	if(this.saldo >= this.precoItem[n_item]){
-		return "Produto liberado ;)";
-	else
-		return "Saldo insuficiente";	
-	
+bool VM:: libera_produto(int n_item){
+	if(saldo >= precoItem[n_item]){
+		return true;
+	}
+	else{
+		return false;	
+	}
 }
 	
-float VM::devolve_troco(float t){
+float VM::devolve_troco(){
 	return troco;
 }
 
@@ -138,30 +138,47 @@ int main()
     int opcao;
     
     maq1.liga_desliga(); //liga a máquina
-    
-    cout << "Digite a quantidade de dinheiro inserido: " << endl;
-    cin >> saldo;
-    maq1.setSaldo(saldo);
-    maq1.getSaldo();
-    
-    cout << "Digite o número do produto desejado:" << endl;
-    cout << " (1)   Salgadinho 1 " << endl;
-    cout << " (2)   Salgadinho 2 " << endl;
-    cout << " (3)   Salgadinho 3 " << endl;
-    cout << " (4)         Doce 1 " << endl;
-    cout << " (5)         Doce 2 " << endl;
-    cout << " (6) Refrigerante 1 " << endl;
-    cout << " (7) Refrigerante 2 " << endl;
-    cout << " (8) Refrigerante 3 " << endl;
-    
-    cin >> opcao;
-    maq1.set_item(opcao);
+    if (maq1.liga_desliga())
+    	cout << "A máquina ligou" << endl;
     
     
+    cout << "$   Insira as moedas $   " << endl; 
+    cout << "(Digite o valor inserido)" << endl;
+    cin >> saldo; //como se o usuário inserisse moedas
+    maq1.setSaldo(saldo); //coloca o valor inserido no atributo saldo 
+    //VERIFICAR SE É POSSÍVEL CHAMAR O MÉTODO DIRETAMENTE:
+ 	//cin >> maq.setSaldo(x); algo assim
     
-    m1.libera_produto();
+    cout << "Saldo: " << maq1.getSaldo() << endl; //mostra o saldo atual 
     
+    cout << "Digite o numero do produto desejado:" << endl; //menu 
+    cout << " (1)   Cheetos " << endl;
+    cout << " (2)   Doritos " << endl;
+    cout << " (3)    Kitkat " << endl;
+    cout << " (4)  Amendoim " << endl;
+    cout << " (5)   Bolinho  " << endl;
+    cout << " (6)       Bis" << endl;
+    cout << " (7)   Torcida" << endl;
+    cout << " (8)    Cookie " << endl;
     
+    cin >> opcao; //armazena o valor inserido na variável opcao
+    if(maq1.set_item(opcao)){
+    	cout << "Produto selecionado" << endl;
+	}
+	else{
+		cout << "Item indisponível, escolha outro" << endl;
+	}; 
+    
+    maq1.libera_produto(opcao); //chama a função que libera o produto, abre o compartimento etc
+    
+  	if(maq1.libera_produto(opcao)){
+		cout << "Produto liberado ;)" << endl;
+		maq1.setTroco(opcao); //cálculo do troco
+    	cout << "Troco: " << maq1.devolve_troco() << endl; 
+	}
+	else{
+		cout << "Saldo insuficiente" << endl;	
+	}
     
     return 0;       
 }
