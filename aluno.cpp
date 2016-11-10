@@ -1,82 +1,61 @@
-/* Classe Aluno
-
-- Nome: string
-- RA: int {const}
-- nro_notas: int
-- *ptr: double* //ponteiro para o vetor de notas
-- contador: int {static}
-
-+ aluno(nome: string, nro_notas: int)
-+ setNome(nome: string): void
-+ getNome(): string 
-+ getRA()? int {const}
-+ getNroNotas(): int {const}
-+ setNota(pos: int, valor: double): bool
-+ getNota(pos: int, valor: double): bool
-+ getProxRA(): int {static}
-
-
-Aluno(string nome, int nro_notas): RA(cont_ra){
-
-}
-
-
-
-
-*/
-
 #include <iostream>
 #include <string>
+#include <string.h>
 
 #define numNotas 3
 
-using std::string;
+//sem os const
+
+using namespace std;
 
 class Aluno{
 	
 	public:
 		Aluno(); //construtor
-		Aluno(string nome, int nro_notas);
-		~Aluno();
-		void setNome(string n);
-		string getNome() const;
-		int getRA() const;
-		int getNroNotas() const;
+		Aluno(string nome, int nro_notas); //construtor com parametros
+		~Aluno(); //destrutor
+		void setNome(string n); //seta um nome para o aluno
+		string getNome(); //retorna o nome do aluno, constante pois não altera
+		int getRA(); //retorna o RA, constante pois não altera
+		int getNroNotas();
+		bool setNroNotas(int nr);
 		bool setNota(int pos, double *valor);
-		bool getNota(int pos, double *valor) const;
-		static const int getProxRA();
+		bool getNota(int pos, double *valor);
+		//static int getProxRA();
 		
-		
-	private:
+	private: 
 		string nome;
-		const int RA;
+		int RA;
 		int nro_notas;
 		double *ptr;
 	
-	static int cont_ra;	
+		static int cont_ra;   	
 };
 
 int Aluno::cont_ra;
 
-Aluno::Aluno(): RA(cont_ra){
+Aluno::Aluno(){
 	
-	nome = " ";
+	nome = "maria";
 	cont_ra ++;
-	ptr = new double [numNotas]; //número padrao de notas
+	setNroNotas(10);
+	ptr = new double [getNroNotas()]; //número padrao de notas
 	RA = Aluno::cont_ra;
 	
 	for(int i = 0; i < numNotas; i++){
-		ptr[i] = 0;
+		ptr[i] = 1;
 	}
 }
 
 
-Aluno::Aluno(string nome, int nro_notas ): RA(cont_ra){
+Aluno::Aluno(string nome, int nro_notas ){
 	
 	setNome(nome);
 	cont_ra ++;
 	ptr = new double [nro_notas];
-	RA = cont_ra;
+	//RA = Aluno::cont_ra;
+	
+	setNroNotas(nro_notas);
 	
 	for(int i = 0; i < nro_notas; i++){
 		std::cout << "Digite a nota da prova " << i << std::endl;
@@ -94,15 +73,25 @@ void Aluno::setNome(string n){
 	nome = n;
 }
 
-string Aluno::getNome() const{
+string Aluno::getNome(){
+	cout << "getNome rodou" << endl;
 	return nome;
 }
 
-int Aluno::getRA() const{
+int Aluno::getRA(){
+	cout << "getRA rodou" << endl;
 	return RA;
 }
 
-int Aluno::getNroNotas() const{
+
+bool Aluno::setNroNotas(int nr){
+	//if...
+	nro_notas = nr;
+	return true;
+}
+
+int Aluno::getNroNotas(){
+	cout << "getNroNotas rodou" << endl;
 	return nro_notas;
 }
 
@@ -116,7 +105,8 @@ bool Aluno::setNota(int pos, double *valor){
 	
 }
 
-bool Aluno::getNota(int pos, double *valor) const{
+bool Aluno::getNota(int pos, double *valor){
+	cout << "getNota rodou" << endl;
 	if(pos >= 0 && pos <= getNroNotas()){
 		*valor = ptr[pos];
 		return true;
@@ -127,9 +117,9 @@ bool Aluno::getNota(int pos, double *valor) const{
 	
 }
 
-const int Aluno::getProxRA() const{
+/*int Aluno::getProxRA(){
 	return RA;
-}
+}*/
 
 
 
@@ -138,13 +128,38 @@ const int Aluno::getProxRA() const{
 
 int main(int argc, char** argv) {
 	
-	Aluno aluno1;
+	Aluno aluno1; //declara um aluno 1
+	std::cout << "Nome do aluno 1:";
+	std::cout << aluno1.getNome() << std::endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "RA do aluno 1:";
+	std::cout << aluno1.getRA() << std::endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "Número de notas do aluno 1:";
+	std::cout << aluno1.getNroNotas() << std::endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "Nota 1 do aluno 1:";
+	double nota1;
+	std::cout << aluno1.getNota(1, &nota1) <<endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "Nota 1 do aluno 1 na variável:";
+	std::cout << nota1 << std::endl;
+	
+/*	Aluno aluno2("Joao", 5);
+	
 	std::cout << aluno1.getNome() << std::endl;
 	std::cout << aluno1.getRA() << std::endl;
 	std::cout << aluno1.getNroNotas() << std::endl;
 	
-	double nota1;
-	std::cout << aluno1.getNota(1, nota1) << std::endl;
-	std::cout << nota1 << std::endl;
+	double nota2;
+	std::cout << aluno1.getNota(1, &nota1) <<endl;
+	
+	std::cout << nota1 << std::endl; */
+	
+	
 	return 0;
 }
