@@ -149,16 +149,29 @@ int main(int argc, char** argv) {
 	std::cout << "Nota 1 do aluno 1 na variável:";
 	std::cout << nota1 << std::endl;
 	
-/*	Aluno aluno2("Joao", 5);
+	std::cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" "<< endl;
 	
-	std::cout << aluno1.getNome() << std::endl;
-	std::cout << aluno1.getRA() << std::endl;
-	std::cout << aluno1.getNroNotas() << std::endl;
+	Aluno aluno2("Joao", 5);
 	
-	double nota2;
-	std::cout << aluno1.getNota(1, &nota1) <<endl;
+	std::cout << "Nome do aluno 21:";
+	std::cout << aluno2.getNome() << std::endl;
+	std::cout << "-------------------------------------" << endl;
 	
-	std::cout << nota1 << std::endl; */
+	std::cout << "RA do aluno 2:";
+	std::cout << aluno2.getRA() << std::endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "Número de notas do aluno 2:";
+	std::cout << aluno2.getNroNotas() << std::endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "Nota 1 do aluno 2:";
+	double nota4;
+	std::cout << aluno1.getNota(4, &nota4) <<endl;
+	std::cout << "-------------------------------------" << endl;
+	
+	std::cout << "Nota 4 do aluno 2 na variável:";
+	std::cout << nota1 << std::endl;
 	
 	
 	return 0;
