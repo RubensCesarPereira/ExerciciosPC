@@ -1,2 +1,2 @@
-# VendingMachine
-Exercício da matéria de PC
+# Exercícios
+Exercícios da matéria de PC
