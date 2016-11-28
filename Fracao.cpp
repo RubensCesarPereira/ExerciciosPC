@@ -22,7 +22,7 @@ class Fracao{
 
 	public:
 		
-		Fracao(int VN, int VD);
+		Fracao(int VN = 0, int VD = 1);
 		void setN(int VN);
 		void setD(int VD);
 		int getN() const;
@@ -64,12 +64,27 @@ class Fracao{
 			cout << getN() << "/"<< getD() << endl;
 		}
 		
+/**************************************************************************/
+		Fracao Multiplica(Fracao a, Fracao b ){
+		Fracao res;
+		res.setD(a.getD() * b.getD());
+		res.setN(a.getN() * b.getN());
+		
+		return res;		
+			
+			
+	}	
+		
+		
 		
 int main(){
 	
+
+	
+	
 	Fracao A(1, 2);
 	Fracao B(3, 4);
-	Fracao C(0,0);
+	Fracao C;
 	
 	cout << "A: ";
 	A.mostra();
@@ -77,6 +92,13 @@ int main(){
 	B.mostra();
 	cout << "C: ";
 	C.mostra();
+	
+	//	C = A*B;
+	C = Multiplica(A, B);
+	
+	C.mostra();
+	
+	
 return 0;
 	
 	
