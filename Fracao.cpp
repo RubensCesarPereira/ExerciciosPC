@@ -28,6 +28,7 @@ class Fracao{
 		int getN() const;
 		int getD() const;
 		void mostra() const;
+		Fracao multiplica(Fracao b );
 		
 	private:
 		int N;
@@ -63,17 +64,19 @@ class Fracao{
 		void Fracao::mostra() const{
 			cout << getN() << "/"<< getD() << endl;
 		}
-		
-/**************************************************************************/
-		Fracao operator*(Fracao a, Fracao b ){
+
+		Fracao Fracao::multiplica(Fracao b ){
 		Fracao res;
-		res.setD(a.getD() * b.getD());
-		res.setN(a.getN() * b.getN());
+		res.setD(getD() * b.getD());
+		res.setN(getN() * b.getN());
 		
 		return res;		
 			
 			
 	}	
+		
+/**************************************************************************/
+		
 		
 		
 		
@@ -93,7 +96,7 @@ int main(){
 	cout << "C: ";
 	C.mostra();
 	
-		C = A*B;
+	C = A.multiplica(B);
 	//C = Multiplica(A, B);
 	
 	C.mostra();
