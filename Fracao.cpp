@@ -65,7 +65,7 @@ class Fracao{
 		}
 		
 /**************************************************************************/
-		Fracao Multiplica(Fracao a, Fracao b ){
+		Fracao operator*(Fracao a, Fracao b ){
 		Fracao res;
 		res.setD(a.getD() * b.getD());
 		res.setN(a.getN() * b.getN());
@@ -93,8 +93,8 @@ int main(){
 	cout << "C: ";
 	C.mostra();
 	
-	//	C = A*B;
-	C = Multiplica(A, B);
+		C = A*B;
+	//C = Multiplica(A, B);
 	
 	C.mostra();
 	
