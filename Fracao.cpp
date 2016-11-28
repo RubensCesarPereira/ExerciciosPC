@@ -61,18 +61,22 @@ class Fracao{
 		}
 		
 		void Fracao::mostra() const{
-			cout << getN() << endl;
-			cout << "--" << endl;
-			cout << getD() << endl;
+			cout << getN() << "/"<< getD() << endl;
 		}
 		
 		
 int main(){
 	
-	Fracao f1(2, 5);
-	f1.mostra();
+	Fracao A(1, 2);
+	Fracao B(3, 4);
+	Fracao C(0,0);
 	
-	
+	cout << "A: ";
+	A.mostra();
+	cout << "B: ";
+	B.mostra();
+	cout << "C: ";
+	C.mostra();
 return 0;
 	
 	
