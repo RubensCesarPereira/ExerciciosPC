@@ -9,10 +9,7 @@ Fraçao
 +getN(): int {const}
 +get(): int {const}
 +mostra():void {const}
-
-
 */
-
 
 #include <iostream>
 
@@ -29,6 +26,7 @@ class Fracao{
 		int getD() const;
 		void mostra() const;
 		Fracao operator*(Fracao b );
+		Fracao& operator++();
 		
 	private:
 		int N;
@@ -66,14 +64,20 @@ class Fracao{
 		}
 
 		Fracao Fracao::operator*(Fracao b ){
-		Fracao res;
-		res.setD(getD() * b.getD());
-		res.setN(getN() * b.getN());
+			Fracao res;
+			res.setD(getD() * b.getD());
+			res.setN(getN() * b.getN());
 		
-		return res;		
-			
-			
-	}	
+			return res;				
+		}	
+		
+	/*	Fracao Fracao::operator++(int x){ //pós-fixado
+			return this
+		} */
+		
+		Fracao& Fracao::operator++(){ //pré-fixado
+			N += D;
+		} 
 		
 /**************************************************************************/
 		
@@ -88,6 +92,7 @@ int main(){
 	Fracao A(1, 2);
 	Fracao B(3, 4);
 	Fracao C;
+	Fracao D(1,4);
 	
 	cout << "A: ";
 	A.mostra();
@@ -96,14 +101,48 @@ int main(){
 	cout << "C: ";
 	C.mostra();
 	
+	cout << "D: ";
+	D.mostra();
+	
+	cout << endl;
+	
+
+	
 	C = A*B;
 	//C = Multiplica(A, B);
+	//C = A.Multiplica(B)
 	
+	cout << "C = A*B" << endl;
 	C.mostra();
 	
+	cout << endl;
+	
+	++D;
+	cout << "D incrementado" << endl;
+	D.mostra();
 	
 return 0;
+
+/* 
+
+Fracao operator++(int fantasma) - pós-fixado, tem parâmetro fantasma que serve apenas para diferenciar os dois
+
+Fracao& operator++() - pré-fixado, não tem nenhum parâmetro - Retorno por referência
+
+não são const, pois alteram os objetos
+
+tipo de retorno - próprio objeto da classe
+
+++A = B + C --- é válido
+A++ = B + C --- não é válido
+
+*/
+
+
+
+
+
+
 	
 	
 }
-		
