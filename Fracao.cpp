@@ -27,6 +27,7 @@ class Fracao{
 		void mostra() const;
 		Fracao operator*(Fracao b );
 		Fracao& operator++();
+		Fracao operator++(int x);
 		
 	private:
 		int N;
@@ -71,12 +72,17 @@ class Fracao{
 			return res;				
 		}	
 		
-	/*	Fracao Fracao::operator++(int x){ //pós-fixado
-			return this
-		} */
+		Fracao Fracao::operator++(int x){ //pós-fixado			
+			Fracao temp = *this; //temp == cópia antes de incrementar
+			N = N + D;
+			return temp;
+			
+			 
+		} 
 		
 		Fracao& Fracao::operator++(){ //pré-fixado
 			N += D;
+			return *this;
 		} 
 		
 /**************************************************************************/
@@ -115,12 +121,32 @@ int main(){
 	cout << "C = A*B" << endl;
 	C.mostra();
 	
+	++C;
+	cout << "++C" << endl;
+	C.mostra();
+	
+	C++;
+	cout << "C++" << endl;
+	C.mostra();
+	
+	
 	cout << endl;
 	
 	++D;
 	cout << "D incrementado" << endl;
 	D.mostra();
 	
+	cout << "C: ";
+	C.mostra();
+	
+	A = C++;
+	cout << "A = C++: ";
+	A.mostra();
+	
+	cout << "C++: ";
+	C.mostra();
+	
+		
 return 0;
 
 /* 
