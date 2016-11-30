@@ -26,8 +26,9 @@ class Fracao{
 		int getD() const;
 		void mostra() const;
 		Fracao operator*(Fracao b );
-		Fracao& operator++();
-		Fracao operator++(int x);
+		Fracao& operator++(); //pré-fixado
+		Fracao operator++(int x); //pós-fixado
+		friend ostream & operator<<(ostream &, const Fracao&);
 		
 	private:
 		int N;
@@ -87,6 +88,11 @@ class Fracao{
 		
 /**************************************************************************/
 		
+ostream& operator<<(ostream &saida, const Fracao& x)
+{
+	saida << x.N << "/" << x.D;
+	return saida; 
+}		
 		
 		
 		
@@ -145,6 +151,11 @@ int main(){
 	
 	cout << "C++: ";
 	C.mostra();
+
+	cout << endl;
+	cout << "Imprimindo C direto no cout, com a funcao friend: ";
+	
+	cout << C;
 	
 		
 return 0;
