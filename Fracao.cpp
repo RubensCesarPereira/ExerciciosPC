@@ -94,6 +94,15 @@ ostream& operator<<(ostream &saida, const Fracao& x)
 	return saida; 
 }		
 		
+istream& operator>>(istream &entrada, Fracao &x){
+	int d,n;
+	entrada >> n;
+	entrada.ignore();
+	entrada >> d;
+	x.setN(n);
+	x.setD(d);
+	return entrada;
+}
 		
 		
 int main(){
@@ -153,9 +162,15 @@ int main(){
 	C.mostra();
 
 	cout << endl;
-	cout << "Imprimindo C direto no cout, com a funcao friend: ";
+	cout << "Imprimindo C direto no cout, com a função friend: ";
 	
-	cout << C;
+	cout << C << endl;
+	
+	Fracao a;
+	
+	cout << "Entre com uma fração: ";
+	cin >> a;
+	cout << "a: " << a;
 	
 		
 return 0;
