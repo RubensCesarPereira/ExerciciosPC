@@ -29,7 +29,8 @@ class Fracao{
 		Fracao& operator++(); //pré-fixado
 		Fracao operator++(int x); //pós-fixado
 		friend ostream & operator<<(ostream &, const Fracao&);
-		bool operator>(const Fracao o2) const;
+		bool operator>(const Fracao& o2) const;
+		bool operator<(const Fracao& o2) const;
 		
 	private:
 		int N;
@@ -87,8 +88,13 @@ class Fracao{
 			return *this;
 		} 
 		
-		bool Fracao::operator>(const Fracao o2) const{
-			return float(N/D == (o2.N)/float (o2.D));
+		bool Fracao::operator>(const Fracao& o2) const{
+			return float(N/D > (o2.N)/float (o2.D));
+		
+		}
+		
+		bool Fracao::operator<(const Fracao& o2) const{
+			return float(N/D < (o2.N)/float (o2.D));
 		
 		}
 		
@@ -167,6 +173,11 @@ int main(){
 		cout <<"A eh maior" << endl;
 	else
 		cout << "A nao eh maior" << endl;
+		
+	if (B < A)
+		cout <<"B eh menor" << endl;
+	else
+		cout << "B nao eh menor" << endl;
 	
 		
 return 0;
