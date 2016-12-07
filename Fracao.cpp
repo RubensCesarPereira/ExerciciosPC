@@ -183,7 +183,7 @@ int main(){
 return 0;
 
 /* 
-Fracao operator++(int fantasma) - pós-fixado, tem parâmetro fantasma que serve apenas para diferenciar os dois
+Fracao operator++(int fantasma) - pós-fixado, tem parâmetro fantasma que serve apenas para diferenciar os dois - retorno por valor
 Fracao& operator++() - pré-fixado, não tem nenhum parâmetro - Retorno por referência
 não são const, pois alteram os objetos
 tipo de retorno - próprio objeto da classe
