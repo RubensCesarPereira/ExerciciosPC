@@ -1,5 +1,5 @@
 /* 
-FraÃ§ao
+Fraçao
 -----------------
 - N: int
 - D: int
@@ -26,9 +26,10 @@ class Fracao{
 		int getD() const;
 		void mostra() const;
 		Fracao operator*(Fracao b );
-		Fracao& operator++(); //prÃ©-fixado
-		Fracao operator++(int x); //pÃ³s-fixado
+		Fracao& operator++(); //pré-fixado
+		Fracao operator++(int x); //pós-fixado
 		friend ostream & operator<<(ostream &, const Fracao&);
+		bool operator>(const Fracao o2) const;
 		
 	private:
 		int N;
@@ -73,18 +74,23 @@ class Fracao{
 			return res;				
 		}	
 		
-		Fracao Fracao::operator++(int x){ //pÃ³s-fixado			
-			Fracao temp = *this; //temp == cÃ³pia antes de incrementar
+		Fracao Fracao::operator++(int x){ //pós-fixado			
+			Fracao temp = *this; //temp == cópia antes de incrementar
 			N = N + D;
 			return temp;
 			
 			 
 		} 
 		
-		Fracao& Fracao::operator++(){ //prÃ©-fixado
+		Fracao& Fracao::operator++(){ //pré-fixado
 			N += D;
 			return *this;
 		} 
+		
+		bool Fracao::operator>(const Fracao o2) const{
+			return float(N/D == (o2.N)/float (o2.D));
+		
+		}
 		
 /**************************************************************************/
 		
@@ -94,15 +100,6 @@ ostream& operator<<(ostream &saida, const Fracao& x)
 	return saida; 
 }		
 		
-istream& operator>>(istream &entrada, Fracao &x){
-	int d,n;
-	entrada >> n;
-	entrada.ignore();
-	entrada >> d;
-	x.setN(n);
-	x.setD(d);
-	return entrada;
-}
 		
 		
 int main(){
@@ -162,32 +159,25 @@ int main(){
 	C.mostra();
 
 	cout << endl;
-	cout << "Imprimindo C direto no cout, com a funÃ§Ã£o friend: ";
+	cout << "Imprimindo C direto no cout, com a funcao friend: " << endl;
 	
-	cout << C << endl;
+	cout << C << endl << endl;
 	
-	Fracao a;
-	
-	cout << "Entre com uma fraÃ§Ã£o: ";
-	cin >> a;
-	cout << "a: " << a;
+	if (A > B)
+		cout <<"A eh maior" << endl;
+	else
+		cout << "A nao eh maior" << endl;
 	
 		
 return 0;
 
 /* 
-
-Fracao operator++(int fantasma) - pÃ³s-fixado, tem parÃ¢metro fantasma que serve apenas para diferenciar os dois
-
-Fracao& operator++() - prÃ©-fixado, nÃ£o tem nenhum parÃ¢metro - Retorno por referÃªncia
-
-nÃ£o sÃ£o const, pois alteram os objetos
-
-tipo de retorno - prÃ³prio objeto da classe
-
-++A = B + C --- Ã© vÃ¡lido
-A++ = B + C --- nÃ£o Ã© vÃ¡lido
-
+Fracao operator++(int fantasma) - pós-fixado, tem parâmetro fantasma que serve apenas para diferenciar os dois
+Fracao& operator++() - pré-fixado, não tem nenhum parâmetro - Retorno por referência
+não são const, pois alteram os objetos
+tipo de retorno - próprio objeto da classe
+++A = B + C --- é válido
+A++ = B + C --- não é válido
 */
 
 
