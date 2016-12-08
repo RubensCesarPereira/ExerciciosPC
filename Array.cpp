@@ -1,11 +1,8 @@
-#ifndef ARRAY1_H
-#define ARRAY1_H
-
 #include <iostream>
 using namespace std;
 
 
-//DefiniÁ„o da classe
+//Defini√ß√£o da classe
 
 class Array{
 	friend ostream &operator<<(ostream &, const Array &);
@@ -13,11 +10,11 @@ class Array{
 	
 public:
 	Array(int = 10); //construtor
-	Array(const Array &); //construtor de cÛpia
+	Array(const Array &); //construtor de c√≥pia
 	~Array();
 	int getSize() const;
 	
-	//operador de atribuiÁ„o
+	//operador de atribui√ß√£o
 	const Array &operator=(const Array &);
 	
 	//operador de igualdade
@@ -25,7 +22,7 @@ public:
 	
 	//oposto do operador == 
 	bool operator!=( const Array &right) const{
-		return !(this == right); //invoca Array::operator==
+		return !(*this == right); //invoca Array::operator==
 	}
 		
 	//operador de subscrito
@@ -37,19 +34,19 @@ public:
 		
 };
 
-#endif
+
 
 #include <iostream>
 
 using namespace std;
 
-#include <iompanip>
+#include <iomanip>
 using std::setw;
 #include <new>
 #include <cstdlib>
-#include "array1.h" //definiÁ„o de classe
+// #include "array1.h" //defini√ß√£o de classe
 
-//construtor padr„o, com tamanho default de 10
+//construtor padr√£o, com tamanho default de 10
 Array::Array(int arraySize){
 	//valida o array
 	size = (arraySize > 0 ? arraySize : 10);
@@ -60,7 +57,7 @@ Array::Array(int arraySize){
 	
 }//fim do construtor
 
-//construtor de cÛpia
+//construtor de c√≥pia
 //DEVE receber uma referencia para evitar loop infinito
 Array::Array(const Array &arrayToCopy) : size(arrayToCopy.size){
 	ptr = new int[size]; //aloca o array
@@ -68,29 +65,29 @@ Array::Array(const Array &arrayToCopy) : size(arrayToCopy.size){
 	for(int i = 0; i < size; i++)
 		ptr[i] = arrayToCopy.ptr[i]; //copia p/objeto
 		
-} //fim do construtor de cÛpia
+} //fim do construtor de c√≥pia
 
 //destrutor
 Array::~Array(){
-	delete [] ptr; //recupera espaÁo alocado anteriormente
+	delete [] ptr; //recupera espa√ßo alocado anteriormente
 }
 
 int Array::getSize() const{
 	return size;
 }
 
-//sobrecarga do operador de atribuiÁ„o
-//retornando const n„o permite: (a1 = a2) = a3
+//sobrecarga do operador de atribui√ß√£o
+//retornando const n√£o permite: (a1 = a2) = a3
 const Array &Array::operator=(const Array &right){
-	if(right != this){
-		//verifica auto atribuiÁ„o
+	if(right != *this){
+		//verifica auto atribui√ß√£o
 		
 		//p/arrays de tamanhos diferentes, eliminar original
 		//e alocar novo array
 		if(size != right.size){
-			delete[] ptr; //recupera o espaÁo
+			delete[] ptr; //recupera o espa√ßo
 			size = right.size; //redimensiona o objeto
-			ptr = new int[size]; //aloca novo espaÁo
+			ptr = new int[size]; //aloca novo espa√ßo
 		}
 		
 		for(int i = 0; i < size; i++)
@@ -100,7 +97,7 @@ const Array &Array::operator=(const Array &right){
 		
 	}
 	
-	//determina se dois arrays s„o iguais
+	//determina se dois arrays s√£o iguais
 	//retornando verdadeiro ou falso
 	
 	bool Array::operator==(const Array &right) const{
@@ -116,7 +113,7 @@ const Array &Array::operator=(const Array &right){
 		
 	//sobrecarga de subscrito
 	int &Array::operator[](int subscript){
-		//verifica se indice est· fora do range
+		//verifica se indice est√° fora do range
 		if(subscript < 0 || subscript >= size){
 			cout << "\nErro: indice " << subscript
 				 << " fora do range" << endl;
@@ -130,9 +127,141 @@ const Array &Array::operator=(const Array &right){
 	//sobrecarga para arrays constantes
 	const int &Array::operator[](int subscript) const{
 		//verifica limites
+		if(subscript < 0 || subscript >= size ){
+			cout << "\nErro: Indice " << subscript
+				 << " fora dos limites" << endl;
+				 
+			exit(1);
+		}
+		
+		return ptr[subscript];
+	}
+	
+	//sobrecarga de leitura
+	istream &operator>>(istream &input, Array &a){
+		for(int i = 0; i < a.size; i++)
+			input >> a.ptr[i];
+			
+		return input; //permite cin >> x >> y;
+		
 	} 
 	
-	//slide 7
+	//sobrecarga de sa√≠da
+	ostream &operator<<(ostream &output, const Array &a){
+		int i;
+		
+		for(i = 0; i < a.size; i++){
+			output << setw(12) << a.ptr[i];
+			
+			if((i + 1) % 4 == 0)
+				output << endl;
+		} //end for
+		
+		if(i % 4 != 0)
+			output << endl;
+			
+		return output; //permite cout << x << y;
+		
+	}
 	
+
 	
 }
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	
+	Array inteiro 1(7);
+	Array inteiro2;
+	
+	//imprime inteiro1 (tamanho e conteudo)
+	cout << "Tamanho do array 1 √© "
+		 << inteiro1.getSize()
+		 << "\n Array ap√≥s inicializa√ß√£o:\n" << inteiro1;
+		 
+	//imprime inteiro2 (tamanho e conteudo)
+	cout << "Tamanho do array 2 √© "
+		 << inteiro2.getSize()
+		 << "\n Array ap√≥s inicializa√ß√£o:\n" << inteiro2;
+		 
+	//le e imprime inteiro 1 e inteiro 2
+	cout << "\n Entre com 17 inteiros:\n";
+	cin >> inteiro1 >> inteiro2;
+	
+	cout << "\nAgora os arrays cont√©m:\n"
+		 << "inteiro1:\n" << inteiro1
+		 << "inteiro2:\n" << inteiro2;
+		 
+	//usando(!=)
+	cout << "\n usando != \n";
+	
+	if(inteiro1 != inteiro2)
+		cout << "inteiro1 e inteiro2 s√£o diferentes\n";
+		
+	//criando array inteiros3 usando inteiro1 para inicializar
+	
+	Array inteiro3(inteiro1); //construtor de c√≥pia
+	
+	cout << "\n Tamanho do array inteiros3 √© "
+		 << inteiro3.getSize()
+		 << "\nApos inicializar: \n" << inteiro3;
+		 
+	cout << "\n Atribui√ß√£o: \n";
+	inteiro1 = inteiro2; //observar diferen√ßa de tamanho
+	
+	cout << "inteiro1: \n" << inteiro1
+	     << " inteiro2:\n" << inteiro2;
+		 
+	//usando (==)
+	cout << "\n usando == \n";
+	
+	if(inteiro1 == inteiro2)
+		cout << "inteiro1 e inteiro2 sao iguais\n";
+		
+	//usando indice
+	cout << "\ninteiro[5] √© " << inteiro[5];
+	
+	cout << "\n\nAtribuicao a inteiro1[5]\n";
+	inteiro1[5] = 1000;
+	cout << "inteiro1: \n" << inteiro1;
+	
+	//tentando acessar posicao fora do array
+	cout << "\nInteiro1[15]" << endl;
+	inteiro1[15] = 1000; //ERRO		 	 
+		 	
+	return 0;
+			 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
