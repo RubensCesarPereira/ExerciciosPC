@@ -10,16 +10,15 @@ class MeuInt{
 		int operator*(int);
 		int operator*(MeuInt);
 		int operator/(int);
-		friend ostream &operator>>(ostream&, const MeuInt&);
-		friend istream &operator>>(istream&, MeuInt&);
+		
 		
 		int getInteiro();
 		void setInteiro(int);
 		
 	private:
 		int inteiro;
-		
-	
+		friend ostream &operator>>(ostream&, const MeuInt&);
+		friend istream &operator>>(istream&, MeuInt&);
 };
 
 MeuInt::MeuInt(int i){
@@ -66,14 +65,17 @@ MeuInt calcDelta(MeuInt a, MeuInt b, MeuInt c){
 	
 }
 
-ostream &operator>>(ostream& saida, const MeuInt& meuint){
-	output << meuint.getInteiro();
+ostream &operator<<(ostream& out, const MeuInt& meuint){
+	out << meuint.inteiro;
 	
-	return output;
+	return out;
 }
 
-istream &operator>>(istream& entrada, MeuInt& meuint){
+istream &operator>>(istream& in, MeuInt& meuint){
 	
+	in >> meuint.inteiro;
+	
+	return in;
 }
 		
 
