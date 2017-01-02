@@ -17,7 +17,7 @@ class MeuInt{
 		
 	private:
 		int inteiro;
-		friend ostream &operator>>(ostream&, const MeuInt&);
+		friend ostream &operator<<(ostream&, const MeuInt&);
 		friend istream &operator>>(istream&, MeuInt&);
 };
 
