@@ -8,7 +8,11 @@ class MeuInt{
 		int operator+(int);
 		int operator-(int);
 		int operator*(int);
+		int operator*(MeuInt);
 		int operator/(int);
+		friend ostream &operator>>(ostream&, const MeuInt&);
+		friend istream &operator>>(istream&, MeuInt&);
+		
 		int getInteiro();
 		void setInteiro(int);
 		
@@ -36,6 +40,13 @@ int MeuInt::operator*(int x){
 	inteiro = x * inteiro;
 	return inteiro;
 }
+
+int MeuInt::operator*(MeuInt x){
+	inteiro = x * inteiro;
+	return inteiro;
+}
+
+
 int MeuInt::operator/(int x){
 	inteiro = x / inteiro;
 	return inteiro;
@@ -49,24 +60,35 @@ void MeuInt::setInteiro(int x){
 	inteiro = x;
 }
 
-calcDelta(MeuInt a, MeuInt b, MeuInt c){
-	delta = b*b - 4 * a * c
+MeuInt calcDelta(MeuInt a, MeuInt b, MeuInt c){
+	MeuInt delta = b*b - a * c * 4;
 	return delta;
 	
 }
 
+ostream &operator>>(ostream& saida, const MeuInt& meuint){
+	output << meuint.getInteiro();
+	
+	return output;
+}
+
+istream &operator>>(istream& entrada, MeuInt& meuint){
+	
+}
+		
 
 
 int main(int argc, char** argv) {
 	
 	MeuInt inteiro1(10);
+	MeuInt A, B, C;
 	
 	int c = inteiro1 + 1;
 	
 	cout << "inteiro1 + 1: ";
 	cout << c << endl;
 	
-	cout << "Entre com as variáveis: " << endl;
+	cout << "Entre com as variÃ¡veis: " << endl;
 	cout << "A: ";
 	cin >> A;
 	
@@ -75,12 +97,6 @@ int main(int argc, char** argv) {
 	
 	cout << "C: ";
 	cin >> C;
-	
-	
-	
-	
-	
-	
 	
 	
 	return 0;
