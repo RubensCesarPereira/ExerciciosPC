@@ -1,2 +1,2 @@
 # Exercícios
-Exercícios da matéria de PC
+Exercícios da matéria Programação de Computadores
