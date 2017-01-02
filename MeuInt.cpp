@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h> 
 using namespace std;
 
 class MeuInt{
@@ -59,11 +60,21 @@ void MeuInt::setInteiro(int x){
 	inteiro = x;
 }
 
+//b² - 4 * a * c
 MeuInt calcDelta(MeuInt a, MeuInt b, MeuInt c){
 	MeuInt delta = b*b - a * c * 4;
 	return delta;
 	
 }
+
+double calcRaiz1(MeuInt a, MeuInt b, MeuInt c){ //+ do "+ ou -"
+	return ( b *(-1) + sqrt(calcDelta(a, b, c)))/ a * 2;
+}
+
+MeuInt calcRaiz2(MeuInt a, MeuInt b, MeuInt c){ //- do "+ ou -"
+	return (- b - sqrt(calcDelta(a, b, c)))/ a * 2;
+}
+
 
 ostream &operator<<(ostream& out, const MeuInt& meuint){
 	out << meuint.inteiro;
@@ -100,6 +111,8 @@ int main(int argc, char** argv) {
 	cout << "C: ";
 	cin >> C;
 	
+	//calculo do delta
+	calcDelta(A, B, C);
 	
 	return 0;
 }
