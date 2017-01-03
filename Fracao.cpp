@@ -1,5 +1,5 @@
 /* 
-Fraçao
+FraÃ§ao
 -----------------
 - N: int
 - D: int
@@ -25,9 +25,17 @@ class Fracao{
 		int getN() const;
 		int getD() const;
 		void mostra() const;
-		Fracao operator*(Fracao b );
-		Fracao& operator++(); //pré-fixado
-		Fracao operator++(int x); //pós-fixado
+		Fracao operator*(Fracao b);
+		Fracao operator*(int i);
+		Fracao operator/(int i);
+		Fracao operator/(Fracao f);
+		Fracao& operator++(); //prÃ©-fixado
+		Fracao operator++(int x); //pÃ³s-fixado
+		float operator+(int x);
+		float operator+(Fracao f);
+		float operator-(int x);
+		float operator-(Fracao f);
+
 		friend ostream & operator<<(ostream &, const Fracao&);
 		bool operator>(const Fracao& o2) const;
 		bool operator<(const Fracao& o2) const;
@@ -35,8 +43,6 @@ class Fracao{
 	private:
 		int N;
 		int D;
-
-
 };
 
 		Fracao::Fracao(int VN, int VD){
@@ -75,15 +81,36 @@ class Fracao{
 			return res;				
 		}	
 		
-		Fracao Fracao::operator++(int x){ //pós-fixado			
-			Fracao temp = *this; //temp == cópia antes de incrementar
+		Fracao Fracao::operator*(int i){
+			Fracao aux;
+			aux.setN(N * i);
+			aux.setD(D);
+			return aux; 
+		}
+		Fracao Fracao::operator/(int i){
+			Fracao aux;
+			aux.setN(N / i);
+			aux.setD(D);
+			return aux;			
+		}
+		
+		Fracao Fracao::operator/(Fracao f){
+	        Fracao res;
+			res.setD(getD() * f.getN());
+			res.setN(getN() * f.getD());
+		
+			return res;	
+		}
+		
+		Fracao Fracao::operator++(int x){ //pÃ³s-fixado			
+			Fracao temp = *this; //temp == cÃ³pia antes de incrementar
 			N = N + D;
 			return temp;
 			
 			 
 		} 
 		
-		Fracao& Fracao::operator++(){ //pré-fixado
+		Fracao& Fracao::operator++(){ //prÃ©-fixado
 			N += D;
 			return *this;
 		} 
@@ -98,6 +125,25 @@ class Fracao{
 		
 		}
 		
+		float Fracao::operator+(int x){
+			return (float) N/D + x;
+			
+		}
+		float Fracao::operator+(Fracao f){
+			return (float)N/D + (float)f.N /f.D;
+		}
+		
+		float Fracao::operator-(int x){
+			return (float) N/D - x;
+			
+		}
+		float Fracao::operator-(Fracao f){
+			return (float)N/D - (float)f.N /f.D;
+		}
+		
+
+		
+		
 /**************************************************************************/
 		
 ostream& operator<<(ostream &saida, const Fracao& x)
@@ -109,10 +155,7 @@ ostream& operator<<(ostream &saida, const Fracao& x)
 		
 		
 int main(){
-	
 
-	
-	
 	Fracao A(1, 2);
 	Fracao B(3, 4);
 	Fracao C;
@@ -179,23 +222,40 @@ int main(){
 	else
 		cout << "B nao eh menor" << endl;
 	
-		
+	Fracao X(1,4);
+	Fracao Y(1,2);
+	
+	Fracao K(1, 2);
+	
+	cout << X + Y << endl;
+	
+	cout<< K + 2 << endl;	
+	
+	Fracao J(3, 2);
+	Fracao L(1, 2);
+	
+	cout << J - L << endl;
+	
+	cout << J - 1 << endl;
+	cout << L - 1 << endl;
+	
+	Fracao U(8,2);
+	Fracao V(4,2);
+	
+	cout << U * 3 << endl;
+	cout << U / V << endl;
+	cout << U / 2 << endl;
+	
+	
 return 0;
 
 /* 
-Fracao operator++(int fantasma) - pós-fixado, tem parâmetro fantasma que serve apenas para diferenciar os dois - retorno por valor
-Fracao& operator++() - pré-fixado, não tem nenhum parâmetro - Retorno por referência
-não são const, pois alteram os objetos
-tipo de retorno - próprio objeto da classe
-++A = B + C --- é válido
-A++ = B + C --- não é válido
+Fracao operator++(int fantasma) - pÃ³s-fixado, tem parÃ¢metro fantasma que serve apenas para diferenciar os dois - retorno por valor
+Fracao& operator++() - prÃ©-fixado, nÃ£o tem nenhum parÃ¢metro - Retorno por referÃªncia
+nÃ£o sÃ£o const, pois alteram os objetos
+tipo de retorno - prÃ³prio objeto da classe
+++A = B + C --- Ã© vÃ¡lido
+A++ = B + C --- nÃ£o Ã© vÃ¡lido
 */
 
-
-
-
-
-
-	
-	
 }
