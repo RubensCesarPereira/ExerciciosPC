@@ -28,6 +28,8 @@ public:
 	//operador de subscrito
 	int &operator[](int);
 	
+	const int& operator[](int subscript) const;
+	
 	private:
 		int size; //tamanho
 		int *ptr; //ponteiro para o primeiro elemento do array
@@ -96,6 +98,7 @@ const Array &Array::operator=(const Array &right){
 		return *this; //permite x = y = z, por exemplo
 		
 	}
+}
 	
 	//determina se dois arrays são iguais
 	//retornando verdadeiro ou falso
@@ -165,33 +168,30 @@ const Array &Array::operator=(const Array &right){
 	}
 	
 
-	
-}
-
 #include <iostream>
 
 using namespace std;
 
 int main(){
 	
-	Array inteiro 1(7);
+	Array inteiro1(7);
 	Array inteiro2;
 	
 	//imprime inteiro1 (tamanho e conteudo)
 	cout << "Tamanho do array 1 é "
 		 << inteiro1.getSize()
-		 << "\n Array após inicialização:\n" << inteiro1;
+		 << "\n Array apos inicializacao:\n" << inteiro1;
 		 
 	//imprime inteiro2 (tamanho e conteudo)
 	cout << "Tamanho do array 2 é "
 		 << inteiro2.getSize()
-		 << "\n Array após inicialização:\n" << inteiro2;
+		 << "\n Array apos inicializacao:\n" << inteiro2;
 		 
 	//le e imprime inteiro 1 e inteiro 2
 	cout << "\n Entre com 17 inteiros:\n";
 	cin >> inteiro1 >> inteiro2;
 	
-	cout << "\nAgora os arrays contém:\n"
+	cout << "\nAgora os arrays contem:\n"
 		 << "inteiro1:\n" << inteiro1
 		 << "inteiro2:\n" << inteiro2;
 		 
@@ -199,17 +199,17 @@ int main(){
 	cout << "\n usando != \n";
 	
 	if(inteiro1 != inteiro2)
-		cout << "inteiro1 e inteiro2 são diferentes\n";
+		cout << "inteiro1 e inteiro2 sao diferentes\n";
 		
 	//criando array inteiros3 usando inteiro1 para inicializar
 	
 	Array inteiro3(inteiro1); //construtor de cópia
 	
-	cout << "\n Tamanho do array inteiros3 é "
+	cout << "\n Tamanho do array inteiros3 eh "
 		 << inteiro3.getSize()
 		 << "\nApos inicializar: \n" << inteiro3;
 		 
-	cout << "\n Atribuição: \n";
+	cout << "\n Atribuicao: \n";
 	inteiro1 = inteiro2; //observar diferença de tamanho
 	
 	cout << "inteiro1: \n" << inteiro1
@@ -222,7 +222,7 @@ int main(){
 		cout << "inteiro1 e inteiro2 sao iguais\n";
 		
 	//usando indice
-	cout << "\ninteiro[5] é " << inteiro[5];
+	cout << "\ninteiro[5] é " << inteiro1[5];
 	
 	cout << "\n\nAtribuicao a inteiro1[5]\n";
 	inteiro1[5] = 1000;
@@ -235,20 +235,6 @@ int main(){
 	return 0;
 			 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
