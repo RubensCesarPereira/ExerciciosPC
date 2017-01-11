@@ -3,12 +3,12 @@
 POLIMORFISMO:
 	AD HOC
 		SOBRECARGA
-		COER«√O
+		COER√á√ÉO
 		
 		
 	UNIVERSAL
 		SUB TIPO -- ESTE VAI SER O ESTUDADO
-		TEMPLATES -- PR”XIMO T”PICO
+		TEMPLATES -- PR√ìXIMO T√ìPICO
 		
 Ex:
 
@@ -17,22 +17,22 @@ Animal = *ptr
 ptr = new Cachorro;
 ptr -> emitirSom();
 
-Assim iria chamar o mÈtodo emitirSom da classe base Animal, n„o da classe derivada Cachorro
+Assim iria chamar o m√©todo emitirSom da classe base Animal, n√£o da classe derivada Cachorro
 
 	Vantagens do polimorfismo:
 	
-	Torna os programas extensÌveis
+	Torna os programas extens√≠veis
 	
-A decis„o sobre qual o mÈtodo que deve ser selecionado, de acordo com o tipo da classe derivada,
-È tomada em tempo de execuÁ„o, atravÈs do mecanismo de ligaÁ„o tardia.
+A decis√£o sobre qual o m√©todo que deve ser selecionado, de acordo com o tipo da classe derivada,
+√© tomada em tempo de execu√ß√£o, atrav√©s do mecanismo de liga√ß√£o tardia.
 Em C++ isso ocorre utilizando-se ponteiros.
 
-Usa-se uma vari·vel de um tipo ˙nico (do tipo da super-classe) para referenciar objetos variados 
+Usa-se uma vari√°vel de um tipo √∫nico (do tipo da super-classe) para referenciar objetos variados 
 do tipo das sub-classes.
 
-Envolve o uso autom·tico do objeto armazenado na super-classe para selecionar um mÈtodo de uma 
-das sub-classes. O tipo do objeto armazenado n„o e conhecido atÈ a execuÁ„o do programa. 
-A escolha do mÈtodo a ser executado È feita dinamicamente.		
+Envolve o uso autom√°tico do objeto armazenado na super-classe para selecionar um m√©todo de uma 
+das sub-classes. O tipo do objeto armazenado n√£o e conhecido at√© a execu√ß√£o do programa. 
+A escolha do m√©todo a ser executado √© feita dinamicamente.		
 
 Class Mamifero{
 
@@ -63,7 +63,8 @@ class Animal{
 	public:
 		Animal(string n = " ");
 		string getNome();
-		void emitirSom();
+		virtual void emitirSom();
+		virtual void comer();
 		
 	private:
 		string nome;
@@ -93,6 +94,10 @@ void Animal::emitirSom(){
 	cout << "Estou falando " << endl;
 }
 
+void Animal::comer(){
+	cout << "Estou comendo " << endl;
+}
+
 Cachorro::Cachorro(int p){
 	pulgas = p;
 }
@@ -109,9 +114,11 @@ void Cachorro::abanarRabo(){
 
 int main(int argc, char** argv) {
 	
-	
-	
-	
+	Animal * ptr;
+	ptr = new Cachorro(5);
+	ptr-> emitirSom();
+	ptr-> comer();
+	delete ptr;
 	
 	return 0;
 }
