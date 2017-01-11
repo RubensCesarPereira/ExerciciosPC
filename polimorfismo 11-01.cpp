@@ -47,7 +47,7 @@ Class Mamifero{
 		int idade;
 };
 		
-ideal colocar o destrutor como virtual		
+ideal colocar o DESTRUTOR COMO VIRTUAL, sempre que usar algum método virtual na classe		
 		
 		
 		
@@ -62,9 +62,10 @@ class Animal{
 
 	public:
 		Animal(string n = " ");
-		string getNome();
-		virtual void emitirSom();
-		virtual void comer();
+		virtual ~Animal();
+		string getNome() const;
+		virtual void emitirSom() const;                               //virtual só no protótipo
+		virtual void comer() const;
 		
 	private:
 		string nome;
@@ -74,8 +75,9 @@ class Animal{
 class Cachorro : public Animal{
 	public:
 		Cachorro(int p = 0);
-		void emitirSom();
-		void abanarRabo();
+		~Cachorro();
+		void emitirSom() const;
+		void abanarRabo() const;
 
 	private:
 		int pulgas;
@@ -86,15 +88,19 @@ Animal::Animal(string n){
 	nome = n;	
 }
 
-string Animal::getNome(){
+Animal::~Animal(){
+	cout << "destrutor de animal" << endl;
+}
+
+string Animal::getNome() const{
 	return nome;	
 }
 
-void Animal::emitirSom(){
+void Animal::emitirSom() const{
 	cout << "Estou falando " << endl;
 }
 
-void Animal::comer(){
+void Animal::comer() const{
 	cout << "Estou comendo " << endl;
 }
 
@@ -102,14 +108,17 @@ Cachorro::Cachorro(int p){
 	pulgas = p;
 }
 
-void Cachorro::emitirSom(){
+void Cachorro::emitirSom() const{
 	cout << "Au au" << endl;
 }
 
-void Cachorro::abanarRabo(){
+void Cachorro::abanarRabo() const{
 	cout << "Estou abanando o rabo" << endl;
 }
 
+Cachorro::~Cachorro(){
+	cout << "tchau, ja limpei tudo" << endl;
+}
 
 
 int main(int argc, char** argv) {
