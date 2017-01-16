@@ -2,28 +2,28 @@
 POLIMORFISMO:
 	AD HOC
 		SOBRECARGA
-		COER«√O
+		COER√á√ÉO
 		
 	UNIVERSAL
 		SUB TIPO -- ESTE VAI SER O ESTUDADO
-		TEMPLATES -- PR”XIMO T”PICO	
+		TEMPLATES -- PR√ìXIMO T√ìPICO	
 Ex:
 Animal = *ptr
 ptr = new Cachorro;
 ptr -> emitirSom();
-Assim iria chamar o mÈtodo emitirSom da classe base Animal, n„o da classe derivada Cachorro
+Assim iria chamar o m√©todo emitirSom da classe base Animal, n√£o da classe derivada Cachorro
 	Vantagens do polimorfismo:
 	
-	Torna os programas extensÌveis
+	Torna os programas extens√≠veis
 	
-A decis„o sobre qual o mÈtodo que deve ser selecionado, de acordo com o tipo da classe derivada,
-È tomada em tempo de execuÁ„o, atravÈs do mecanismo de ligaÁ„o tardia.
+A decis√£o sobre qual o m√©todo que deve ser selecionado, de acordo com o tipo da classe derivada,
+√© tomada em tempo de execu√ß√£o, atrav√©s do mecanismo de liga√ß√£o tardia.
 Em C++ isso ocorre utilizando-se ponteiros.
-Usa-se uma vari·vel de um tipo ˙nico (do tipo da super-classe) para referenciar objetos variados 
+Usa-se uma vari√°vel de um tipo √∫nico (do tipo da super-classe) para referenciar objetos variados 
 do tipo das sub-classes.
-Envolve o uso autom·tico do objeto armazenado na super-classe para selecionar um mÈtodo de uma 
-das sub-classes. O tipo do objeto armazenado n„o e conhecido atÈ a execuÁ„o do programa. 
-A escolha do mÈtodo a ser executado È feita dinamicamente.		
+Envolve o uso autom√°tico do objeto armazenado na super-classe para selecionar um m√©todo de uma 
+das sub-classes. O tipo do objeto armazenado n√£o e conhecido at√© a execu√ß√£o do programa. 
+A escolha do m√©todo a ser executado √© feita dinamicamente.		
 Class Mamifero{
 	public:
 		Mamifero();
@@ -35,7 +35,7 @@ Class Mamifero{
 		int idade;
 };
 		
-ideal colocar o DESTRUTOR COMO VIRTUAL, sempre que usar algum mÈtodo virtual na classe		
+ideal colocar o DESTRUTOR COMO VIRTUAL, sempre que usar algum m√©todo virtual na classe		
 */
 
 #include <iostream>
@@ -49,7 +49,7 @@ class Animal{
 		Animal(string n = " ");
 		virtual ~Animal();
 		string getNome() const;
-		virtual void emitirSom() const;                               //virtual sÛ no protÛtipo
+		virtual void emitirSom() const;                               //virtual s√≥ no prot√≥tipo
 		virtual void comer() const;
 		
 	private:
@@ -96,34 +96,35 @@ class Cachorro : public Animal{
 class Gato : public Animal{
 	
 	public:
-		Gato(string Anome = " "): Animal(string n){};
+		Gato(string Anome = " "){ nome = Anome;};
 		void emitirSom() const;
 		
-		
+	private:
+		string nome;
+		int pulgas;
 };
 
 class Poodle : public Cachorro{
 	
 	public:
-		Poodle(string Anome = ""): Cachorro(int p = 0){};
+		Poodle(string Anome = ""){nome = Anome;};
 		void emitirSom() const{ cout << "*Latindo como Poodle*" << endl;};
 		void abanarRabo() const{cout << "*Abanado rabo como Poodle*" << endl;};
 		
 	private:
-		
+		string nome;
 };
 
 class Vira : public Cachorro{
 	
 	public:
-		Vira(string Anome = ""): Cachorro(int p = 0){};
+		Vira(string Anome = ""){nome = Anome;};
 		void emitirSom() const{ cout << "*Latindo como um vira-lata*" << endl;};
 		void abanarRabo() const{cout << "*Abanado rabo como um vira-lata*" << endl;};
 		
 	private:
-		
+		string nome;
 };
-
 
 
 Animal::Animal(string n){
@@ -176,11 +177,11 @@ int main(int argc, char** argv) {
 	Animal *vetor[100] = {NULL}; //inicializando o vetor todo com null
 	
 	vetor[0] = new Cachorro(5);
-	vetor[1] = new Gato(4);
+	vetor[1] = new Gato("Ted");
 	vetor[2] = new Cachorro(2);
 	vetor[3] = new Carneiro(2);
-	vetor[4] = new Poodle(3);
-	vetor[5] = new Vira(4);
+	vetor[4] = new Poodle("Dolly");
+	vetor[5] = new Vira("Fred");
 	
 	
 	for(int i = 0; i < 100; i++)
