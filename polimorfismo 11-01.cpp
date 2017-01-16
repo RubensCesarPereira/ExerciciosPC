@@ -5,11 +5,9 @@ POLIMORFISMO:
 		SOBRECARGA
 		COERÇÃO
 		
-		
 	UNIVERSAL
 		SUB TIPO -- ESTE VAI SER O ESTUDADO
-		TEMPLATES -- PRÓXIMO TÓPICO
-		
+		TEMPLATES -- PRÓXIMO TÓPICO	
 Ex:
 
 Animal = *ptr
@@ -48,9 +46,6 @@ Class Mamifero{
 };
 		
 ideal colocar o DESTRUTOR COMO VIRTUAL, sempre que usar algum método virtual na classe		
-		
-		
-		
 */
 
 #include <iostream>
@@ -119,7 +114,6 @@ void Cachorro::abanarRabo() const{
 Cachorro::~Cachorro(){
 	cout << "tchau, ja limpei tudo" << endl;
 }
-
 
 int main(int argc, char** argv) {
 	
